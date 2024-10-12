@@ -28,8 +28,6 @@ public class Item {
     private double price;
     @Column(nullable = false)
     private int quantity;
-    @Column(columnDefinition = "LONGTEXT")
-    private String picture;
     @OneToMany(mappedBy = "item")
     private List<OrderDetail> orderDetails;
 }
