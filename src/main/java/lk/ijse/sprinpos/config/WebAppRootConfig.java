@@ -50,12 +50,8 @@ public class WebAppRootConfig {
 
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setPackagesToScan("lk.ant.spring_pos_system.entity");
+        factory.setPackagesToScan("lk.ijse.sprinpos.entity");
         factory.setDataSource(dataSource());
-
-        Properties jpaProperties = new Properties();
-        jpaProperties.setProperty("hibernate.hbm2ddl.auto", "create");
-        factory.setJpaProperties(jpaProperties);
 
         return factory;
     }
