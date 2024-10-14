@@ -1,9 +1,9 @@
 package lk.ijse.sprinpos.util;
 
-import lk.ijse.sprinpos.dto.CustomerDTO;
-import lk.ijse.sprinpos.dto.ItemDTO;
-import lk.ijse.sprinpos.dto.OrderDTO;
-import lk.ijse.sprinpos.dto.OrderDetailDTO;
+import lk.ijse.sprinpos.dto.impl.CustomerDTO;
+import lk.ijse.sprinpos.dto.impl.ItemDTO;
+import lk.ijse.sprinpos.dto.impl.OrderDTO;
+import lk.ijse.sprinpos.dto.impl.OrderDetailDTO;
 import lk.ijse.sprinpos.entity.Customer;
 import lk.ijse.sprinpos.entity.Item;
 import lk.ijse.sprinpos.entity.Order;
