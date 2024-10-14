@@ -1,6 +1,8 @@
-package lk.ijse.sprinpos.dto;
+package lk.ijse.sprinpos.dto.impl;
 
 
+import lk.ijse.sprinpos.customObj.CustomerResponce;
+import lk.ijse.sprinpos.dto.SuperDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerDTO {
+public class CustomerDTO implements SuperDTO, CustomerResponce {
     private String id;
     private String name;
     private String address;

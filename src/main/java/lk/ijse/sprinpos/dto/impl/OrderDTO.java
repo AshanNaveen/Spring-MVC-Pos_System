@@ -1,4 +1,4 @@
-package lk.ijse.sprinpos.dto;
+package lk.ijse.sprinpos.dto.impl;
 
 import lk.ijse.sprinpos.entity.Customer;
 import lombok.AllArgsConstructor;
