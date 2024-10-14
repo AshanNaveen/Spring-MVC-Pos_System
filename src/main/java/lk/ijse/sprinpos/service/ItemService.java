@@ -1,6 +1,6 @@
 package lk.ijse.sprinpos.service;
 
-import lk.ijse.sprinpos.dto.ItemDTO;
+import lk.ijse.sprinpos.dto.impl.ItemDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

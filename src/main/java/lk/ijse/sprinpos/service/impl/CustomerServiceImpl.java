@@ -1,7 +1,7 @@
 package lk.ijse.sprinpos.service.impl;
 
 import lk.ijse.sprinpos.dao.CustomerDao;
-import lk.ijse.sprinpos.dto.CustomerDTO;
+import lk.ijse.sprinpos.dto.impl.CustomerDTO;
 import lk.ijse.sprinpos.entity.Customer;
 import lk.ijse.sprinpos.exceptions.CustomerNotFoundException;
 import lk.ijse.sprinpos.service.CustomerService;

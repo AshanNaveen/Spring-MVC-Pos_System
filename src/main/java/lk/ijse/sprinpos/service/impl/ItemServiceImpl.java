@@ -1,7 +1,7 @@
 package lk.ijse.sprinpos.service.impl;
 
 import lk.ijse.sprinpos.dao.ItemDao;
-import lk.ijse.sprinpos.dto.ItemDTO;
+import lk.ijse.sprinpos.dto.impl.ItemDTO;
 import lk.ijse.sprinpos.entity.Item;
 import lk.ijse.sprinpos.exceptions.ItemNotFoundException;
 import lk.ijse.sprinpos.service.ItemService;
