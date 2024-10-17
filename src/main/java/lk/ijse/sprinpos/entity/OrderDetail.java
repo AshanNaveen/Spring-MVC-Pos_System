@@ -1,9 +1,12 @@
 package lk.ijse.sprinpos.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 /**
  * @author Naveen Theekshana
@@ -11,10 +14,11 @@ import lombok.NoArgsConstructor;
  * @project SpringPos
  */
 @Entity
+@Table(name = "order_detail")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderDetail {
+public class OrderDetail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -25,5 +29,6 @@ public class OrderDetail {
     private Item item;
     @ManyToOne
     @JoinColumn(name = "orderId",nullable = false)
+    @JsonIgnore
     private Order order;
 }

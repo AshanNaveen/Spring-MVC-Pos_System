@@ -16,10 +16,11 @@ import java.util.List;
  * @project SpringPos
  */
 @Entity
+@Table(name = "customer")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Customer {
+public class Customer implements Serializable {
     @Id
     private String id;
     @Column(nullable = false)
