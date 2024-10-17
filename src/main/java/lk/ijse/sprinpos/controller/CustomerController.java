@@ -1,6 +1,7 @@
 package lk.ijse.sprinpos.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lk.ijse.sprinpos.customObj.CustomerErrorResponse;
 import lk.ijse.sprinpos.customObj.CustomerResponse;
 import lk.ijse.sprinpos.dto.impl.CustomerDTO;
@@ -46,7 +47,7 @@ public class CustomerController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createCustomer(@RequestBody CustomerDTO dto, HttpServletRequest request) {
+    public ResponseEntity<Void> createCustomer(@Valid @RequestBody CustomerDTO dto, HttpServletRequest request) {
         try {
             customerService.saveCustomer(dto);
             logger.info("Received request to save customer on " + request.getRemoteAddr());
@@ -60,7 +61,7 @@ public class CustomerController {
     }
 
     @PutMapping(value = "/{custId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateCustomer(@PathVariable("custId") String custId, @RequestBody CustomerDTO dto, HttpServletRequest request) {
+    public ResponseEntity<String> updateCustomer(@PathVariable("custId") String custId,@Valid @RequestBody CustomerDTO dto, HttpServletRequest request) {
         try {
             customerService.updateCustomer(custId, dto);
             logger.info("Received request to update customer on " + request.getRemoteAddr());
