@@ -31,35 +31,35 @@ public class CustomerController {
     @GetMapping(value = "/{custId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public CustomerResponce getCustomer(@PathVariable("custId") String custId) {
         CustomerDTO customer = customerService.getSelectedCustomer(custId);
-        return customer==null ? new CustomerErrorResponse():customer;
+        return customer == null ? new CustomerErrorResponse() : customer;
     }
 
-    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CustomerDTO> getAllCustomers() {
         return customerService.getAllCustomers();
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createCustomer(@RequestBody CustomerDTO dto) {
-        try{
+        try {
             customerService.saveCustomer(dto);
             return new ResponseEntity<>(HttpStatus.CREATED);
-        }catch (DataPersistFailedException e){
+        } catch (DataPersistFailedException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PutMapping(value = "/{custId}",consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateCustomer(@PathVariable("custId") String custId , @RequestBody CustomerDTO dto) {
+    @PutMapping(value = "/{custId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> updateCustomer(@PathVariable("custId") String custId, @RequestBody CustomerDTO dto) {
         try {
             customerService.updateCustomer(custId, dto);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }catch (CustomerNotFoundException e){
+        } catch (CustomerNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -69,9 +69,9 @@ public class CustomerController {
         try {
             customerService.deleteCustomer(custId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }catch (CustomerNotFoundException e){
+        } catch (CustomerNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

@@ -51,7 +51,7 @@ public class CustomerServiceImpl implements CustomerService {
         if (customer.isPresent()) {
             customerDao.delete(customer.get());
         }else
-            throw new CustomerNotFoundException();
+            throw new CustomerNotFoundException("Customer not found with ID: "+id);
 
     }
 
@@ -61,11 +61,13 @@ public class CustomerServiceImpl implements CustomerService {
         if (customer.isPresent()){
             return mapping.toCustomerDTO(customer.get());
         }else
-            throw new CustomerNotFoundException();
+            throw new CustomerNotFoundException("Customer not found with ID: "+id);
     }
 
     @Override
     public List<CustomerDTO> getAllCustomers() {
-        return mapping.toCustomerDTOList(customerDao.findAll());
+        List<Customer> customers = customerDao.findAll();
+        System.out.println(customers);
+        return mapping.toCustomerDTOList(customers);
     }
 }
