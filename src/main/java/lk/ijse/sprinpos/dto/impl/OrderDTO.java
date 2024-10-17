@@ -1,5 +1,7 @@
 package lk.ijse.sprinpos.dto.impl;
 
+import lk.ijse.sprinpos.customObj.OrderResponse;
+import lk.ijse.sprinpos.dto.SuperDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class OrderDTO {
+public class OrderDTO implements SuperDTO, OrderResponse {
     private String id;
     private Timestamp createdTimestamp;
     private List<OrderDetailDTO> orderDetails;
