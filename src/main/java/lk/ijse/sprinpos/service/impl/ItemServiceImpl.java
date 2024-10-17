@@ -8,6 +8,9 @@ import lk.ijse.sprinpos.exceptions.ItemNotFoundException;
 import lk.ijse.sprinpos.service.ItemService;
 import lk.ijse.sprinpos.util.AppUtil;
 import lk.ijse.sprinpos.util.Mapping;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +23,10 @@ import java.util.Optional;
  * @project SpringPos
  */
 @Service
+@RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
-    @Autowired
+    private static final Logger logger = LoggerFactory.getLogger(ItemServiceImpl.class);
     private ItemDao itemDao;
-
-    @Autowired
     private Mapping mapping;
 
     @Override
@@ -32,6 +34,7 @@ public class ItemServiceImpl implements ItemService {
         Item item = mapping.toItem(itemDTO);
         item.setId(AppUtil.getItemId());
         itemDao.save(item);
+        logger.info("Saved Item : {} ", item.getId());
     }
 
     @Override
@@ -42,7 +45,7 @@ public class ItemServiceImpl implements ItemService {
             item.get().setName(itemDTO.getName());
             item.get().setQuantity(itemDTO.getQuantity());
             item.get().setPrice(itemDTO.getPrice());
-
+            logger.info("Updated Item : {} ", id);
         } else
             throw new ItemNotFoundException("Item not found with ID: "+id);
     }
@@ -52,6 +55,7 @@ public class ItemServiceImpl implements ItemService {
         Optional<Item> item = itemDao.findById(id);
         if (item.isPresent()) {
             itemDao.delete(item.get());
+            logger.info("Deleted Item : {} ", id);
         } else
             throw new ItemNotFoundException("Item not found with ID: "+id);
     }
@@ -60,13 +64,17 @@ public class ItemServiceImpl implements ItemService {
     public ItemDTO getSelectedItem(String id) {
         Optional<Item> item = itemDao.findById(id);
         if (item.isPresent()) {
-            return mapping.toItemDTO(item.get());
+            ItemDTO itemDTO = mapping.toItemDTO(item.get());
+            logger.info("Returned Item : {} ", id);
+            return itemDTO;
         } else
             throw new ItemNotFoundException("Item not found with ID: "+id);
     }
 
     @Override
     public List<ItemDTO> getAllItems() {
-        return mapping.toItemDTOList(itemDao.findAll());
+        List<ItemDTO> itemDTOList = mapping.toItemDTOList(itemDao.findAll());
+        logger.info("Returned list of Items : {} ", itemDTOList.stream().map(ItemDTO::getId));
+        return itemDTOList;
     }
 }

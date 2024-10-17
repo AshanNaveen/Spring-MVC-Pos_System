@@ -8,6 +8,9 @@ import lk.ijse.sprinpos.exceptions.CustomerNotFoundException;
 import lk.ijse.sprinpos.service.CustomerService;
 import lk.ijse.sprinpos.util.AppUtil;
 import lk.ijse.sprinpos.util.Mapping;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +23,11 @@ import java.util.Optional;
  * @project SpringPos
  */
 @Service
+@RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
-    @Autowired
-    private Mapping mapping;
 
-    @Autowired
+    private static final Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
+    private Mapping mapping;
     private CustomerDao customerDao;
 
     @Override
@@ -32,6 +35,7 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = mapping.toCustomer(customerDTO);
         customer.setId(AppUtil.getCustomerId());
         customerDao.save(customer);
+        logger.info("Saved Customer : {} ", customer.getId());
     }
 
     @Override
@@ -42,6 +46,7 @@ public class CustomerServiceImpl implements CustomerService {
             customer.get().setAddress(customerDTO.getAddress());
             customer.get().setEmail(customerDTO.getEmail());
             customer.get().setName(customerDTO.getName());
+            logger.info("Updated Customer : {} ", id);
         } else {
             throw new CustomerNotFoundException("Customer not found with ID: "+id);
         }
@@ -52,6 +57,7 @@ public class CustomerServiceImpl implements CustomerService {
         Optional<Customer> customer = customerDao.findById(id);
         if (customer.isPresent()) {
             customerDao.delete(customer.get());
+            logger.info("Deleted Customer : {} ", id);
         }else
             throw new CustomerNotFoundException("Customer not found with ID: "+id);
 
@@ -61,7 +67,9 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDTO getSelectedCustomer(String id) {
         Optional<Customer> customer= customerDao.findById(id);
         if (customer.isPresent()){
-            return mapping.toCustomerDTO(customer.get());
+            CustomerDTO customerDTO = mapping.toCustomerDTO(customer.get());
+            logger.info("Returned Customer : {} ", id);
+            return customerDTO;
         }else
             throw new CustomerNotFoundException("Customer not found with ID: "+id);
     }
@@ -69,7 +77,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<CustomerDTO> getAllCustomers() {
         List<Customer> customers = customerDao.findAll();
-        System.out.println(customers);
+        logger.info("Returned list of Customers : {} ",customers.stream().map(Customer::getId));
         return mapping.toCustomerDTOList(customers);
     }
 }

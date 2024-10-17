@@ -17,6 +17,8 @@ import lk.ijse.sprinpos.service.OrderService;
 import lk.ijse.sprinpos.util.AppUtil;
 import lk.ijse.sprinpos.util.Mapping;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -37,6 +39,7 @@ public class OrderServiceImpl implements OrderService {
     private ItemDao itemDao;
     private CustomerDao customerDao;
     private Mapping mapping;
+    private static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
 
     @Override
     @Transactional
@@ -70,6 +73,8 @@ public class OrderServiceImpl implements OrderService {
             item.setQuantity(item.getQuantity() - orderDetail.getQtyOnOrder());
             itemDao.save(item);
         });
+
+        logger.info("Saved Order : {} ", order.getId());
     }
 
     @Override
@@ -108,6 +113,8 @@ public class OrderServiceImpl implements OrderService {
             item.setQuantity(item.getQuantity() - orderDetail.getQtyOnOrder());
             itemDao.save(item);
         });
+
+        logger.info("Updated Order : {} ", id);
     }
 
     @Override
@@ -134,13 +141,17 @@ public class OrderServiceImpl implements OrderService {
 
         // Delete order
         orderDao.delete(order);
+
+        logger.info("Deleted Order : {} ", id);
     }
 
     @Override
     public OrderDTO getSelectedOrder(String id) {
         Optional<Order> orderOptional = orderDao.findById(id);
         if (orderOptional.isPresent()) {
-            return mapping.toOrderDTO(orderOptional.get());
+            OrderDTO orderDTO = mapping.toOrderDTO(orderOptional.get());
+            logger.info("Returned Order : {} ", id);
+            return orderDTO;
         } else {
             throw new OrderNotFoundException("Order with ID " + id + " not found");
         }
@@ -149,6 +160,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderDTO> getAllOrders() {
         List<Order> orders = orderDao.findAll();
+        logger.info("Returned list of Orders : {} ", orders.stream().map(Order::getId));
         return mapping.toOrderDTOList(orders);
     }
 }
