@@ -29,7 +29,7 @@ import java.util.List;
 public class OrderController {
 
     private OrderService orderService;
-    private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
+    private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
     @GetMapping(value = "/{orderId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public OrderResponse getOrder(@PathVariable("orderId") String orderId, HttpServletRequest request) {
