@@ -1,6 +1,7 @@
 package lk.ijse.sprinpos.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lk.ijse.sprinpos.customObj.OrderErrorResponse;
 import lk.ijse.sprinpos.customObj.OrderResponse;
 import lk.ijse.sprinpos.dto.impl.OrderDTO;
@@ -45,7 +46,7 @@ public class OrderController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createOrder(@RequestBody OrderDTO order, HttpServletRequest request) {
+    public ResponseEntity<Void> createOrder(@Valid @RequestBody OrderDTO order, HttpServletRequest request) {
         try {
             orderService.saveOrder(order);
             logger.info("Received request to save order on " + request.getRemoteAddr());
@@ -59,7 +60,7 @@ public class OrderController {
     }
 
     @PutMapping(value = "/{orderId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> updateOrder(@PathVariable("orderId") String orderId, @RequestBody OrderDTO orderDTO, HttpServletRequest request) {
+    public ResponseEntity<Void> updateOrder(@PathVariable("orderId") String orderId, @Valid @RequestBody OrderDTO orderDTO, HttpServletRequest request) {
         try {
             orderService.updateOrder(orderId, orderDTO);
             logger.info("Received request to update order on " + request.getRemoteAddr());
