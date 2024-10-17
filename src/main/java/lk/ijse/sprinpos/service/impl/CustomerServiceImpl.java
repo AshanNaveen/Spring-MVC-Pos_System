@@ -1,5 +1,6 @@
 package lk.ijse.sprinpos.service.impl;
 
+import jakarta.transaction.Transactional;
 import lk.ijse.sprinpos.dao.CustomerDao;
 import lk.ijse.sprinpos.dto.impl.CustomerDTO;
 import lk.ijse.sprinpos.entity.Customer;
@@ -34,15 +35,16 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    @Transactional
     public void updateCustomer(String id, CustomerDTO customerDTO) {
         Optional<Customer> customer = customerDao.findById(id);
         if (customer.isPresent()) {
             customer.get().setAddress(customerDTO.getAddress());
             customer.get().setEmail(customerDTO.getEmail());
             customer.get().setName(customerDTO.getName());
-        }else
-            throw new CustomerNotFoundException();
-
+        } else {
+            throw new CustomerNotFoundException("Customer not found with ID: "+id);
+        }
     }
 
     @Override
