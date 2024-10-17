@@ -1,5 +1,6 @@
 package lk.ijse.sprinpos.service.impl;
 
+import jakarta.transaction.Transactional;
 import lk.ijse.sprinpos.dao.ItemDao;
 import lk.ijse.sprinpos.dto.impl.ItemDTO;
 import lk.ijse.sprinpos.entity.Item;
@@ -34,15 +35,16 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    @Transactional
     public void updateItem(String id, ItemDTO itemDTO) {
         Optional<Item> item = itemDao.findById(id);
         if (item.isPresent()) {
-           item.get().setName(itemDTO.getName());
-           item.get().setQuantity(itemDTO.getQuantity());
-           item.get().setPrice(itemDTO.getPrice());
+            item.get().setName(itemDTO.getName());
+            item.get().setQuantity(itemDTO.getQuantity());
+            item.get().setPrice(itemDTO.getPrice());
 
-        }else
-            throw  new ItemNotFoundException();
+        } else
+            throw new ItemNotFoundException("Item not found with ID: "+id);
     }
 
     @Override
@@ -50,8 +52,8 @@ public class ItemServiceImpl implements ItemService {
         Optional<Item> item = itemDao.findById(id);
         if (item.isPresent()) {
             itemDao.delete(item.get());
-        }else
-            throw  new ItemNotFoundException();
+        } else
+            throw new ItemNotFoundException("Item not found with ID: "+id);
     }
 
     @Override
@@ -59,8 +61,8 @@ public class ItemServiceImpl implements ItemService {
         Optional<Item> item = itemDao.findById(id);
         if (item.isPresent()) {
             return mapping.toItemDTO(item.get());
-        }else
-            throw  new ItemNotFoundException();
+        } else
+            throw new ItemNotFoundException("Item not found with ID: "+id);
     }
 
     @Override

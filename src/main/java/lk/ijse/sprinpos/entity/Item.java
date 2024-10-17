@@ -1,13 +1,13 @@
 package lk.ijse.sprinpos.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,10 +16,11 @@ import java.util.List;
  * @project SpringPos
  */
 @Entity
+@Table(name = "item")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Item {
+public class Item implements Serializable {
     @Id
     private String id;
     @Column(nullable = false)
@@ -28,6 +29,7 @@ public class Item {
     private double price;
     @Column(nullable = false)
     private int quantity;
-    @OneToMany(mappedBy = "item")
-    private List<OrderDetail> orderDetails;
+    @OneToMany(mappedBy = "item",fetch = FetchType.EAGER , cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<OrderDetail> orderDetails=new ArrayList<>();
 }
