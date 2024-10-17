@@ -30,8 +30,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CustomerController {
 
-    private CustomerService customerService;
-    private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
+    private final CustomerService customerService;
+    private final Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
     @GetMapping(value = "/{custId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public CustomerResponse getCustomer(@PathVariable("custId") String custId, HttpServletRequest request) {

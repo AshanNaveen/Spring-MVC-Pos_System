@@ -13,11 +13,12 @@ import java.io.Serializable;
  * @date 10/12/2024
  * @project SpringPos
  */
+
 @Entity
-@Table(name = "order_detail")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "order_detail")
 public class OrderDetail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -29,8 +29,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderController {
 
-    private OrderService orderService;
-    private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
+    private final OrderService orderService;
+    private final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
     @GetMapping(value = "/{orderId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public OrderResponse getOrder(@PathVariable("orderId") String orderId, HttpServletRequest request) {

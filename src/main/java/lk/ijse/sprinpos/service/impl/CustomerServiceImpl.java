@@ -26,9 +26,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
 
-    private static final Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
-    private Mapping mapping;
-    private CustomerDao customerDao;
+    private final Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
+    private final Mapping mapping;
+    private final CustomerDao customerDao;
 
     @Override
     public void saveCustomer(CustomerDTO customerDTO) {

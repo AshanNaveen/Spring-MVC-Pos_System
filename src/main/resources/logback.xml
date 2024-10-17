@@ -4,7 +4,7 @@
     <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"/>
 
 <!--    <property name="ROOT_DIR" value="${user.dir}" />-->
-    <property name="ROOT_DIR" value="D:\AAD 1 _ IJSE\Spring_POS_System" />
+    <property name="ROOT_DIR" value="D:\AAD 1 _ IJSE\Phase2 Final\SpringPos" />
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>

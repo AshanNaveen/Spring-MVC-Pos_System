@@ -25,9 +25,9 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
-    private static final Logger logger = LoggerFactory.getLogger(ItemServiceImpl.class);
-    private ItemDao itemDao;
-    private Mapping mapping;
+    private final Logger logger = LoggerFactory.getLogger(ItemServiceImpl.class);
+    private final ItemDao itemDao;
+    private final Mapping mapping;
 
     @Override
     public void saveItem(ItemDTO itemDTO) {

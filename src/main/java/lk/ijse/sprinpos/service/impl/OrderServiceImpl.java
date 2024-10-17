@@ -34,12 +34,13 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
-    private OrderDao orderDao;
-    private OrderDetailDao orderDetailDao;
-    private ItemDao itemDao;
-    private CustomerDao customerDao;
-    private Mapping mapping;
-    private static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
+
+    private final OrderDao orderDao;
+    private final OrderDetailDao orderDetailDao;
+    private final ItemDao itemDao;
+    private final CustomerDao customerDao;
+    private final Mapping mapping;
+    private final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
 
     @Override
     @Transactional

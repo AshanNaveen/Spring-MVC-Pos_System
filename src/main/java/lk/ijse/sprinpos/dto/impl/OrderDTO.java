@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,6 +21,6 @@ import java.util.List;
 public class OrderDTO implements SuperDTO, OrderResponse {
     private String id;
     private Timestamp createdTimestamp;
-    private List<OrderDetailDTO> orderDetails;
+    private List<OrderDetailDTO> orderDetails = new ArrayList<>();
     private String customerId;
 }

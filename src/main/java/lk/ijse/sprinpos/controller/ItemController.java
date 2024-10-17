@@ -30,8 +30,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ItemController {
 
-    private ItemService itemService;
-    private static final Logger logger = LoggerFactory.getLogger(ItemController.class);
+    private final ItemService itemService;
+    private final Logger logger = LoggerFactory.getLogger(ItemController.class);
 
     @GetMapping(value = "/{itemId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ItemResponse getItem(@PathVariable("itemId") String itemId, HttpServletRequest request) {
