@@ -1,6 +1,7 @@
 package lk.ijse.sprinpos.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lk.ijse.sprinpos.customObj.ItemErrorResponse;
 import lk.ijse.sprinpos.customObj.ItemResponse;
 import lk.ijse.sprinpos.dto.impl.ItemDTO;
@@ -47,7 +48,7 @@ public class ItemController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createItem(@RequestBody ItemDTO itemDTO, HttpServletRequest request) {
+    public ResponseEntity<Void> createItem(@Valid @RequestBody ItemDTO itemDTO, HttpServletRequest request) {
         try {
             itemService.saveItem(itemDTO);
             logger.info("Received request to save item on " + request.getRemoteAddr());
@@ -61,7 +62,7 @@ public class ItemController {
     }
 
     @PutMapping(value = "/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateItem(@PathVariable("itemId") String itemId, @RequestBody ItemDTO dto, HttpServletRequest request) {
+    public ResponseEntity<String> updateItem(@PathVariable("itemId") String itemId, @Valid @RequestBody ItemDTO dto, HttpServletRequest request) {
         try {
             itemService.updateItem(itemId, dto);
             logger.info("Received request to update item on " + request.getRemoteAddr());
