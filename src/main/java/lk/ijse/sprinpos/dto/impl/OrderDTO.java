@@ -1,11 +1,11 @@
 package lk.ijse.sprinpos.dto.impl;
 
-import lk.ijse.sprinpos.entity.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * @author Naveen Theekshana
@@ -18,6 +18,6 @@ import java.sql.Timestamp;
 public class OrderDTO {
     private String id;
     private Timestamp createdTimestamp;
-    private String orderDetails;
-    private Customer customer;
+    private List<OrderDetailDTO> orderDetails;
+    private String customerId;
 }

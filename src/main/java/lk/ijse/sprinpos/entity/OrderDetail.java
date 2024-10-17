@@ -17,9 +17,9 @@ import lombok.NoArgsConstructor;
 public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private float id;
-    @Column(columnDefinition ="default 1")
-    private int qtyOnOrder;
+    private Integer id;
+    @Column(columnDefinition = "INTEGER DEFAULT 1")
+    private Integer qtyOnOrder;
     @ManyToOne
     @JoinColumn(name = "itemId",nullable = false)
     private Item item;
